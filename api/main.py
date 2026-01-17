@@ -9,11 +9,15 @@ app = FastAPI(title="Study Productivity & Burnout API")
 # ✅ CORS MUST be added immediately after app creation
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # allow all origins (safe for demo projects)
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_origins=[
+        "http://localhost:3000",
+        "https://localhost:3000",
+    ],
+    allow_credentials=False,  # MUST be False
+    allow_methods=["*"],      # includes OPTIONS
     allow_headers=["*"],
 )
+
 
 # Load models
 productivity_model = joblib.load("model/productivity_model.pkl")
