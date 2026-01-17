@@ -1,9 +1,18 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import numpy as np
 
 app = FastAPI(title="Study Productivity & Burnout API")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 productivity_model = joblib.load("model/productivity_model.pkl")
 burnout_model = joblib.load("model/burnout_model.pkl")
